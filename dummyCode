@@ -201,3 +201,21 @@
  
 //  })
             
+
+// logout request created by sir aqil
+
+
+// const logoutUser =   async(req, res) => {
+//     try {
+//         req.user.token = req.user.token
+
+//         token != req.token
+
+//         await req.user.save()
+
+//         return res.status(200).json()
+//     } catch (e) {
+//         res.status(400).json(e)
+//         console.log(e)
+//     }
+// }
