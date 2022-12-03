@@ -5,49 +5,40 @@ require('dotenv').config()
 
 
 
-const config = process.env;
+const authToken = async function (req, res, next) {
+  try {
+    const token = req.header('Authorization').replace('Bearer ', '')
+    const decoded = jwt.verify(token, process.env.JWT_TOKEN_KEY)
+    const user = await User.findOne({_id : decoded._id, token})
+     if(!user) {
+        throw new Error()
+     }
+     req.token = token 
+     req.user = user
+      next()
 
-module.exports = {
-
-  verifyToken: (req, res, next) => {
-    const token =
-      req.body.token || req.query.token || req.headers["x-access-token"];
-    if (!token) {
-      return res.status(403).json("A token is required for authentication");
-    }
-
-    const decoded = jwt.verify(token, config.JWT_TOKEN_KEY);
-    req.user = decoded;
-    // const { _id } = req.user;
-
-    User.findOne({ email }).then(user => {
-      if (!user.token) {
-        return res.status(403).json("you are not logged in.");
-      }
-    return next();
-    }).catch(e => {
-       res.status(400).json(e)
-      console.log(e)
-
-    });
-
-
-  },
-  isAdmin: async (req, res, next) => {
-    try {
-      if (!req.user.role) return res.status(401).json('You are not authorized for this task!!');
-      return next();
-    } catch (e) {
-      res.status(400).json(e)
-      console.log(e)
-
-    }
+  } catch (e) {
+     res.status(500).send(e)
+     
   }
 
+}
 
+const Admin = async function (req, res, next) {
+  try { 
+   if(!req.user.isAdmin === true) {
+     return res.json({message : 'Sorry sir your not allowed only admin access it!'})
+   }
+   next()
+}catch(e) {
+   res.status(400).send(e)
+
+}
 }
 
 
 
-// bari
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjM1YmM0ZTMyOTgzOTgyZTY1ZDhmYjIxIiwiZW1haWwiOiJiYXJpQGdtYWlsLmNvbSIsImlhdCI6MTY2Njk1ODU2MywiZXhwIjoxNjY3MjE3NzYzfQ.XcJG_MEztw_WqCBDfcb1NqKok0-QU3YRJgDBCE8A53w
+
+module.exports = {authToken , Admin} 
+
+

@@ -219,3 +219,38 @@
 //         console.log(e)
 //     }
 // }
+
+
+
+
+
+    // This code I brought from middleware folder  
+
+//   verifyToken: async (req, res, next) => {
+//     try {
+//     const token =
+//       req.body.token || req.query.token || req.headers("x-access-token");
+//     if (!token) {
+//       return res.status(403).json("A token is required for authentication");
+//     }
+   
+//       const decoded = jwt.verify(token, config.JWT_TOKEN_KEY);
+//       const user = await User.findOne({_id : decoded.user._id , 'tokens.token' : token})
+
+//       if(!user){
+//          throw new Error()
+        
+//       }
+//       req.token = token
+//       req.user = user
+
+//       return next();
+//     }
+//     catch (e){
+//       res.status(400).json(e)
+//       console.log(e)
+
+//     };
+
+
+//   }

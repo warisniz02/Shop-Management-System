@@ -8,6 +8,7 @@ const productRoute = require('./routes/products');
 const sellRoute = require('./routes/sells')
 const bodyParser = require('body-parser')
 
+
 dotenv.config()
 
 process.env.Port
@@ -18,8 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // Routers
-
-app.use(userRoute)
+app.use(userRoute);
 app.use(productRoute)
 app.use(stockRoute)
 app.use(sellRoute)

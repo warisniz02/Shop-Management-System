@@ -1,13 +1,14 @@
 const Joi = require('joi');
 
 const createSell = Joi.object({
-    itemName: Joi.string().required(),
+    name: Joi.string().required(),
     price: Joi.number().required(),
     quantity: Joi.string().required(),
     totalBill: Joi.number().required()
 });
 
 const updateSell = Joi.object({
+    name : Joi.string(),
     price: Joi.number(),
     quantity: Joi.string(),
     totalBill: Joi.number()

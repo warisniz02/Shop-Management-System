@@ -9,9 +9,10 @@ const createProduct = Joi.object({
 
 
 const updateProduct = Joi.object({
+    name : Joi.string(),
     price: Joi.number(),
     expDate: Joi.string(),
-    remain: Joi.string(),
+   
 });
 
 module.exports = {

@@ -32,6 +32,15 @@ const updatedSell = async (req, res) => {
     }
 }
 
+const deleteSell = async (req, res) => {
+  try{
+   const sell = await Sell.findByIdAndDelete(req.params.id)
+        res.status(200).json(sell)
+  }catch(e){
+       res.status(400).send(e)
+  }
+}
 
 
-module.exports = { createSell, getSell, updatedSell };
+
+module.exports = { createSell, getSell, updatedSell , deleteSell};

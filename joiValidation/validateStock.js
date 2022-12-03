@@ -11,7 +11,7 @@ const creatStock = Joi.object({
 })
 
 const updateStock = Joi.object({
-    quantity : Joi.string(),
+    name : Joi.string(),
     buyPrice : Joi.string(),
     sellPrice : Joi.string()
 })

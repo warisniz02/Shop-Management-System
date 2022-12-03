@@ -32,8 +32,18 @@ const updateStock = async (req, res) => {
     }
 };
 
+const deleteStock = async (req, res) => {
+    try{
+     const stock = await Stock.findByIdAndDelete(req.params.id)
+       res.status(200).json(stock)
+    }catch(e){
+        res.status(400).json(e)
+    }
+}
+
 module.exports = {
     creatStock,
     getStock,
     updateStock,
+    deleteStock
 }
